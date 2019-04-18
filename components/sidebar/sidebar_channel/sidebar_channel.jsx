@@ -231,7 +231,8 @@ export default class SidebarChannel extends React.PureComponent {
             rowClass += ' unread-title';
         }
 
-        if (this.props.unreadMentions > 0) {
+        /* CUSTOMIZE: make unreadMsgs has badge*/
+        if (this.props.unreadMentions > 0 || this.props.unreadMsgs > 0) {
             rowClass += ' has-badge';
 
             badge = true;
@@ -282,6 +283,7 @@ export default class SidebarChannel extends React.PureComponent {
             displayName = this.props.channelDisplayName;
         }
 
+        /* CUSTOMIZE: add unreadMsgs passed to SidebarChannelButtonOrLink */
         return (
             <li
                 key={this.props.channelName}
@@ -300,6 +302,7 @@ export default class SidebarChannel extends React.PureComponent {
                     hasDraft={this.props.hasDraft}
                     badge={badge}
                     unreadMentions={this.props.unreadMentions}
+                    unreadMsgs={this.props.unreadMsgs}
                     membersCount={this.props.membersCount}
                     teammateId={this.props.channelTeammateId}
                     teammateDeletedAt={this.props.channelTeammateDeletedAt}

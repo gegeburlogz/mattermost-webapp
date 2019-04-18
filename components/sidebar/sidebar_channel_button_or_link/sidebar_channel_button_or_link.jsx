@@ -14,6 +14,7 @@ import SidebarChannelButtonOrLinkIcon from './sidebar_channel_button_or_link_ico
 import SidebarChannelButtonOrLinkCloseButton from './sidebar_channel_button_or_link_close_button.jsx';
 
 export default class SidebarChannelButtonOrLink extends React.PureComponent {
+    /* CUSTOMIZE: add unreadMsgs */
     static propTypes = {
         link: PropTypes.string.isRequired,
         rowClass: PropTypes.string.isRequired,
@@ -30,6 +31,7 @@ export default class SidebarChannelButtonOrLink extends React.PureComponent {
         badge: PropTypes.bool,
         membersCount: PropTypes.number.isRequired,
         unreadMentions: PropTypes.number,
+        unreadMsgs: PropTypes.number,
         teammateId: PropTypes.string,
         teammateDeletedAt: PropTypes.number,
         teammateIsBot: PropTypes.bool,
@@ -46,6 +48,7 @@ export default class SidebarChannelButtonOrLink extends React.PureComponent {
         browserHistory.push(this.props.link);
     }
 
+    /* CUSTOMIZE: use unreadMsgs instead unreadMentions */
     render = () => {
         let badge = null;
         if (this.props.badge) {
@@ -54,7 +57,7 @@ export default class SidebarChannelButtonOrLink extends React.PureComponent {
                     id='unreadMentions'
                     className='badge'
                 >
-                    {this.props.unreadMentions}
+                    {this.props.unreadMsgs}
                 </span>
             );
         }
