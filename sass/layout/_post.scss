@@ -1,4 +1,4 @@
-@charset 'UTF-8';
+@charset "UTF-8";
 
 .custom-textarea {
     background: transparent;
@@ -277,6 +277,7 @@
         height: 100%;
         width: 100%;
         position: absolute;
+
         &.active {
             display: inline;
         }
@@ -697,10 +698,12 @@
             }
         }
     }
+
     .loading-screen {
         position: relative;
         height: 40px;
-        padding: 0px;
+        padding: 0;
+
         .loading__content {
             height: 40px;
         }
@@ -1673,7 +1676,7 @@
         &:before {
             content: '\f065';
             font-size: 14px;
-}
+        }
 
         &[data-expanded='true']:before {
             content: '\f066';
@@ -1873,6 +1876,39 @@
     }
 }
 
+/** changed 修为用户本人信息的显示方式，将消息移置右侧**/
+.post.current--user {
+    text-align: right;
+
+    .post__img {
+        position: absolute;
+        right: 10px;
+        top: -10px;
+    }
+
+    #postContent {
+        > div {
+            width: 100%;
+            text-align: right;
+        }
+
+        .post__header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            .post__header--info {
+                margin-right: 25px;
+            }
+        }
+
+        .post__body {
+            padding-right: 50px;
+        }
+    }
+}
+
+
 .bot-indicator,
 .post__pinned-badge {
     border-radius: 2px;
@@ -1992,12 +2028,14 @@
         // components/post/post_message_view/post_message_view.jsx must
         // be changed to match it
         max-height: 600px;
+
         .all-emoji {
             .emoticon {
                 min-height: 32px;
                 min-width: 32px;
                 vertical-align: top;
             }
+
             .emoticon--unicode {
                 font-size: 32px;
                 line-height: 1.1;
