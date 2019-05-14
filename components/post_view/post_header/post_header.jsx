@@ -22,7 +22,7 @@ export default class PostHeader extends React.PureComponent {
          * Function called when the comment icon is clicked
          */
         handleCommentClick: PropTypes.func.isRequired,
-
+        handleForwardClick: PropTypes.func.isRequired,
         /*
          * Function called when the post options dropdown is opened
          */
@@ -149,6 +149,7 @@ export default class PostHeader extends React.PureComponent {
                     <PostInfo
                         post={post}
                         handleCommentClick={this.props.handleCommentClick}
+                        handleForwardClick={this.props.handleForwardClick}
                         handleDropdownOpened={this.props.handleDropdownOpened}
                         compactDisplay={this.props.compactDisplay}
                         replyCount={this.props.replyCount}

@@ -145,8 +145,7 @@
         @include legacy-pie-clearfix;
 
         .image-name {
-            /** changed 隐藏了表情的名称**/
-            display: none;
+            display: inline-block;
             font-size: 14px;
             font-weight: bold;
             white-space: nowrap;

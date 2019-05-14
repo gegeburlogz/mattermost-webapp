@@ -21,6 +21,46 @@ import {getDirectChannelName} from 'utils/utils';
 const doDispatch = store.dispatch;
 const doGetState = store.getState;
 
+export function toForwardDirectMessageChannel(userId,messageCopy){
+  return async (dispatch, getState) => {
+      const state = getState();
+      const currentUserId = getCurrentUserId(state);
+      const channelName = getDirectChannelName(currentUserId, userId);
+      const channel = getChannelByName(state, channelName);
+
+      if (!channel) {
+          return dispatch(ChannelActions.createDirectChannel(currentUserId, userId));
+      }
+
+      trackEvent('api', 'api_channels_join_direct');
+      const now = Date.now();
+      const prefDirect = {
+          category: Preferences.CATEGORY_DIRECT_CHANNEL_SHOW,
+          name: userId,
+          value: 'true',
+      };
+      const prefOpenTime = {
+          category: Preferences.CATEGORY_CHANNEL_OPEN_TIME,
+          name: channel.id,
+          value: now.toString(),
+      };
+      const actions = [{
+          type: PreferenceTypes.RECEIVED_PREFERENCES,
+          data: [prefDirect],
+      }, {
+          type: PreferenceTypes.RECEIVED_PREFERENCES,
+          data: [prefOpenTime],
+      }];
+      dispatch(batchActions(actions));
+
+      dispatch(savePreferences(currentUserId, [
+          {user_id: currentUserId, ...prefDirect},
+          {user_id: currentUserId, ...prefOpenTime},
+      ]));
+      return {data: channel};
+  };
+}
+
 export function openDirectChannelToUserId(userId) {
     return async (dispatch, getState) => {
         const state = getState();
