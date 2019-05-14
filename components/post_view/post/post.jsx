@@ -9,6 +9,8 @@ import * as PostUtils from 'utils/post_utils.jsx';
 import PostProfilePicture from 'components/post_profile_picture';
 import PostBody from 'components/post_view/post_body';
 import PostHeader from 'components/post_view/post_header';
+import MoreDirectChannels from 'components/forward_message';
+import {trackEvent} from 'actions/diagnostics_actions.jsx';
 
 export default class Post extends React.PureComponent {
     static propTypes = {
@@ -83,6 +85,8 @@ export default class Post extends React.PureComponent {
         this.state = {
             dropdownOpened: false,
             hover: false,
+            forwardMessageItem:"",
+            showDirectChannelsModal: false,
             sameRoot: this.hasSameRoot(props),
         };
     }
@@ -100,6 +104,21 @@ export default class Post extends React.PureComponent {
         }
 
         this.props.actions.selectPost(post);
+    }
+
+    handleForwardClick = (e) => {
+        e.preventDefault();
+
+        this.setState({
+            forwardMessageItem: this.props.post.message,
+        });
+
+        if (this.state.showDirectChannelsModal) {
+            this.hideMoreDirectChannelsModal();
+        } else {
+            this.showMoreDirectChannelsModal();
+        }
+
     }
 
     handleDropdownOpened = (opened) => {
@@ -202,6 +221,16 @@ export default class Post extends React.PureComponent {
         this.setState({hover: false});
     }
 
+    showMoreDirectChannelsModal = () => {
+        trackEvent('ui', 'ui_channels_more_direct');
+        console.log("trigger")
+        this.setState({showDirectChannelsModal: true});
+    }
+
+    hideMoreDirectChannelsModal = () => {
+        this.setState({showDirectChannelsModal: false});
+    }
+
     render() {
         const {post} = this.props;
         if (!post.id) {
@@ -237,6 +266,17 @@ export default class Post extends React.PureComponent {
             centerClass = 'center';
         }
 
+        let moreDirectChannelsModal;
+        if (this.state.showDirectChannelsModal) {
+            moreDirectChannelsModal = (
+                <MoreDirectChannels
+                    forwardedMessage =  {this.state.forwardMessageItem}
+                    onModalDismissed={this.hideMoreDirectChannelsModal}
+                    isExistingChannel={false}
+                />
+            );
+        }
+
         return (
             <div
                 ref={this.getRef}
@@ -246,6 +286,7 @@ export default class Post extends React.PureComponent {
                 onMouseLeave={this.unsetHover}
                 onTouchStart={this.setHover}
             >
+            {moreDirectChannelsModal}
                 <div
                     id='postContent'
                     className={'post__content ' + centerClass}
@@ -257,6 +298,7 @@ export default class Post extends React.PureComponent {
                         <PostHeader
                             post={post}
                             handleCommentClick={this.handleCommentClick}
+                            handleForwardClick={this.handleForwardClick}
                             handleDropdownOpened={this.handleDropdownOpened}
                             compactDisplay={this.props.compactDisplay}
                             isFirstReply={this.props.isFirstReply}

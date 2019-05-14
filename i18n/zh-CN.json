@@ -2466,6 +2466,7 @@
   "post_info.pin": "置顶到频道",
   "post_info.pinned": "已置顶",
   "post_info.reply": "回复",
+  "post_info.forward": "转发",
   "post_info.system": "系统",
   "post_info.tooltip.add_reactions": "添加互动",
   "post_info.unpin": "从频道取消置顶",

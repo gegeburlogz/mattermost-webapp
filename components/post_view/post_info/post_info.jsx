@@ -33,7 +33,7 @@ export default class PostInfo extends React.PureComponent {
          * Function called when the comment icon is clicked
          */
         handleCommentClick: PropTypes.func.isRequired,
-
+        handleForwardClick: PropTypes.func.isRequired,
         /*
          * Funciton called when the post options dropdown is opened
          */
@@ -180,6 +180,7 @@ export default class PostInfo extends React.PureComponent {
                     commentCount={this.props.replyCount}
                     isFlagged={this.props.isFlagged}
                     handleCommentClick={this.props.handleCommentClick}
+                    handleForwardClick={this.props.handleForwardClick}
                     handleDropdownOpened={this.handleDotMenuOpened}
                     handleAddReactionClick={this.toggleEmojiPicker}
                     isReadOnly={isReadOnly}
