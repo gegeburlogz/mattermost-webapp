@@ -1880,6 +1880,37 @@
     }
 }
 
+.post.current--user {
+    text-align: right;
+    .post__img {
+        position: absolute;
+        right: 10px;
+        top: -10px;
+    }
+
+#postContent {
+    > div {
+        width: 100%;
+        text-align: right;
+    }
+
+    .post__header {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        .post__header--info {
+            margin-right: 25px;
+        }
+    }
+
+    .post__body {
+        padding-right: 50px;
+    }
+}
+}
+
+
 .bot-indicator,
 .post__pinned-badge {
     border-radius: 2px;

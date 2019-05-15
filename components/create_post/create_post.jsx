@@ -271,7 +271,6 @@ export default class CreatePost extends React.Component {
             return value;
         });
         this.onOrientationChange();
-
         // wait to load these since they may have changed since the component was constructed (particularly in the case of skipping the tutorial)
         this.setState({
             enableSendButton,
@@ -301,6 +300,14 @@ export default class CreatePost extends React.Component {
         if (prevProps.currentChannel.id !== this.props.currentChannel.id) {
             this.lastChannelSwitchAt = Date.now();
             this.focusTextbox();
+            let forward =  window.localStorage.getItem("forwarded");
+            if(forward && forward !== ""){
+              this.setState({
+                message:forward || ""
+              });
+              window.localStorage.removeItem("forwarded")
+            }
+
         }
     }
 
@@ -595,7 +602,7 @@ export default class CreatePost extends React.Component {
         const channelId = this.props.currentChannel.id;
         const action = isReaction[1];
         const emojiName = isReaction[2];
-        const postId = this.props.latestReplyablePostId;
+        const postId = this.props.latestReplymessageCopyablePostId;
 
         if (postId && action === '+') {
             this.props.actions.addReaction(postId, emojiName);

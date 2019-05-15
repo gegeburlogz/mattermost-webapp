@@ -32,6 +32,7 @@ export default class DotMenu extends Component {
         commentCount: PropTypes.number,
         isFlagged: PropTypes.bool,
         handleCommentClick: PropTypes.func,
+        handleForwardClick: PropTypes.func,
         handleDropdownOpened: PropTypes.func,
         handleAddReactionClick: PropTypes.func,
         isReadOnly: PropTypes.bool,
@@ -284,6 +285,11 @@ export default class DotMenu extends Component {
                         show={!isSystemMessage && this.props.location === Locations.CENTER}
                         text={Utils.localizeMessage('post_info.reply', 'Reply')}
                         onClick={this.props.handleCommentClick}
+                    />
+                    <MenuItemAction
+                        show={!isSystemMessage && this.props.location === Locations.CENTER}
+                        text={Utils.localizeMessage('post_info.forward', 'Forward')}
+                        onClick={this.props.handleForwardClick}
                     />
                     <MenuItemAction
                         show={!isSystemMessage}
