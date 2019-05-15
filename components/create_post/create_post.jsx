@@ -301,13 +301,13 @@ export default class CreatePost extends React.Component {
             this.lastChannelSwitchAt = Date.now();
             this.focusTextbox();
             let forward =  window.localStorage.getItem("forwarded");
-            if(forward || forward !== ""){
+
+            if(forward && forward !== ""){
               this.setState({
-                message:forward
+                message:forward || ""
               });
+              window.localStorage.removeItem("forwarded")
             }
-            window.localStorage.removeItem("forwarded")
-        }
     }
 
     componentWillUnmount() {
