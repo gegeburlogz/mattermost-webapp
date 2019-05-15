@@ -301,6 +301,7 @@ export default class CreatePost extends React.Component {
             this.lastChannelSwitchAt = Date.now();
             this.focusTextbox();
             let forward =  window.localStorage.getItem("forwarded");
+<<<<<<< HEAD
             if(forward && forward !== ""){
               this.setState({
                 message:forward || ""
@@ -308,6 +309,14 @@ export default class CreatePost extends React.Component {
               window.localStorage.removeItem("forwarded")
             }
 
+=======
+            if(forward || forward !== ""){
+              this.setState({
+                message:forward
+              });
+            }
+            window.localStorage.removeItem("forwarded")
+>>>>>>> d4c422d24541282470a77d39e4cf53e7adb52b0e
         }
     }
 
