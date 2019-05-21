@@ -974,10 +974,8 @@
         }
 
         .post__body {
-            background: transparent !important;
             line-height: 1.5;
             padding: 2px 0 0;
-
             .post--edited {
                 position: relative;
                 top: -1px;
@@ -1494,10 +1492,13 @@
 
     .post__body {
         @include legacy-pie-clearfix;
-        padding: .2em .5em;
-        width: 100%;
+        margin-top: 5px;
+        padding: 10px;
+        float: left;
+        max-width: 600px !important;
         word-wrap: break-word;
-
+        border-radius: 10px;
+        background-color:#e5e5e5;
         &.post--ephemeral {
             padding-right: 20px !important;
         }
@@ -1881,19 +1882,18 @@
 }
 
 .post.current--user {
-    text-align: right;
+    a{
+      color: #fff;
+    }
     .post__img {
         position: absolute;
         right: 10px;
-        top: -10px;
     }
 
 #postContent {
     > div {
         width: 100%;
-        text-align: right;
     }
-
     .post__header {
         display: flex;
         justify-content: flex-end;
@@ -1905,7 +1905,10 @@
     }
 
     .post__body {
-        padding-right: 50px;
+        margin-right:50px;
+        float:right;
+        color: white;
+        background-color:#2171f2 !important;
     }
 }
 }
