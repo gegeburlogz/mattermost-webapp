@@ -1,0 +1,18 @@
+{
+    "type": "sftp",
+    "host": "172.16.39.32",
+    "username": "root",
+    "password": "1234",
+    "port": 22,
+    "remotePath": "/home/go/bin/github.com/mattermost/mattermost-webapp",
+    "uploadOnSave": true
+}
+{
+    "type": "sftp",
+    "host": "172.16.31.85",
+    "username": "root",
+    "password": "Aa123456",
+    "port": 22,
+    "remotePath": "/home/go/bin/github.com/mattermost/mattermost-webapp",
+    "uploadOnSave": true
+}

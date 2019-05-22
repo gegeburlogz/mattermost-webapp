@@ -202,11 +202,12 @@ export default class PostBody extends React.PureComponent {
 
         return (
             <div>
-                {comment}
+
                 <div
                     id={`${post.id}_message`}
                     className={`post__body ${mentionHighlightClass} ${ephemeralPostClass} ${postClass}`}
                 >
+                    {comment}
                     {messageWithAdditionalContent}
                     {fileAttachmentHolder}
                     <ReactionList

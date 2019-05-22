@@ -42,7 +42,13 @@ export default class CommentedOn extends PureComponent {
         const {post} = this.props;
         let message = '';
         if (post.message) {
-            message = Utils.replaceHtmlEntities(post.message);
+          let messageTrimmed = post.message;
+            if(post.message.length > 100){
+              messageTrimmed = post.message.slice(0, 94);
+              messageTrimmed = messageTrimmed+"..."
+            }
+
+            message = Utils.replaceHtmlEntities(messageTrimmed);
         } else if (post.file_ids && post.file_ids.length > 0) {
             message = (
                 <CommentedOnFilesMessage parentPostId={post.id}/>
@@ -70,23 +76,18 @@ export default class CommentedOn extends PureComponent {
         );
 
         return (
-            <div className='post__link'>
-                <span>
-                    <FormattedMessage
-                        id='post_body.commentedOn'
-                        defaultMessage="Commented on {name}'s message: "
-                        values={{
-                            name,
-                        }}
-                    />
-                    <a
-                        className='theme'
-                        onClick={this.props.onCommentClick}
-                    >
-                        {stripMarkdown(message)}
-                    </a>
-                </span>
-            </div>
+
+          <div className={`comment_kunwari`}>
+           <span>{username}</span>
+           <span>
+             <a
+                 className='theme'
+                 onClick={this.props.onCommentClick}
+             >
+                 {stripMarkdown(message)}
+             </a>
+           </span>
+          </div>
         );
     }
 }
